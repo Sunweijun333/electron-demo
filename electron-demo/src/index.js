@@ -11,6 +11,11 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      // 浏览器可以使用node接口
+      nodeIntegration: true,
+      contextIsolation: false
+    }
   });
 
   // and load the index.html of the app.
