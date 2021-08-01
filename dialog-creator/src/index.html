@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p>
+    <button id="btn">点击开启新窗口</button>
+    <script>
+      let {ipcRenderer} = require('electron');
+      ipcRenderer.on('ds-active', (event, arg) => {
+        console.log(event);
+        console.log(arg);
+      });
+    
+      // 主动发送消息给主进程
+      ipcRenderer.on('ds-reply', (event, arg) => {
+        console.log(event);
+        console.log(arg);
+      });
+
+      var btn = document.querySelector('#btn');
+      btn.onclick = function() {
+        ipcRenderer.send('open-new-window');
+      }
+    </script>
+  </body>
+</html>
